@@ -1,0 +1,30 @@
+{
+  "name": "nix-js",
+  "version": "0.1.0",
+  "description": "Fast relief from framework fatigue",
+  "main": "index.js",
+  "scripts": {
+    "test": "karma start"
+  },
+  "keywords": [
+    "nix",
+    "javascript",
+    "typescript",
+    "badass"
+  ],
+  "author": "rob.robb.ns",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jasmine": "^2.8.6",
+    "jasmine-core": "^2.99.1",
+    "karma": "^2.0.0",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-jasmine": "^1.1.1",
+    "karma-typescript": "^3.0.12",
+    "karma-typescript-es6-transform": "^1.0.3",
+    "puppeteer": "^1.1.0",
+    "source-map": "^0.7.1",
+    "ts-loader": "^3.5.0",
+    "typescript": "^2.7.2"
+  }
+}
