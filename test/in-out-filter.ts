@@ -45,21 +45,46 @@ class SimpleConsumer implements Consumer {
     this.list.push(n)
   }
 
-  report(): string {
-    return `list length is ${this.list.length}`
+  head(): string {
+    return `first number is ${this.list[0]}`
+  }
+
+  tail(): string {
+    return `last number is ${this.list[this.list.length-1]}`
   }
 }
+
+// filters must implement both in and out. Note that we can use object literals as well
+const twoEx: Filter = {
+  in(n: number): number {
+    return this.out(n)
+  },
+
+  out(n: number): number {
+    return n * 2
+  },
+}
+
 
 describe('Simple Consumers, Producers and Filters', () => {
   it('Produces', () => {
     const p = new SimpleGen
     expect(p.out()).toBe(1)
+    expect(p.out()).toBe(2)
   })
 
   it('Consumes', () => {
-    const p = new SimpleGen
-    const c = new SimpleConsumer
+    const p = new SimpleGen,
+      c = new SimpleConsumer
     c.in(p.out())
-    expect(c.report()).toBe('list length is 1')
+    expect(c.tail()).toBe('last number is 1')
+  })
+
+  it('Transforms', () => {
+    const p = new SimpleGen,
+      c = new SimpleConsumer
+
+    c.in(twoEx.in(p.out()))
+    expect(c.head()).toBe('first number is 2')
   })
 })
