@@ -1,9 +1,11 @@
-import { UFilter, TVFilter } from '../src/functions'
+import { Filter as f} from '../src/functions'
 
 describe('Unary filter, Typed Variatic Filter', () => {
-  const factor:UFilter<number> = n => n * n
-  const upCase:UFilter<string> = s => s[0].toUpperCase() + s.substring(1)
-  const upCaser:UFilter<string[]> = pair => [pair[0], upCase(pair[1])]
+  const factor:f<number, number> = n => n * n
+  const upCase:f<string, string> = s => s[0].toUpperCase() + s.substring(1)
+  const upCaser:f<string[], string[]> = pair => [pair[0], upCase(pair[1])]
+  // simple dictionary type
+  type dict = { [key: string]: string } 
 
   it('filters and returns a specified primitive type', () => {
     expect(factor(2)).toBe(4)
@@ -16,14 +18,14 @@ describe('Unary filter, Typed Variatic Filter', () => {
   })
 
   it('can be coerced into a union type to make Unary more flexible', () => {
-    const lengther: UFilter<string[] | string> = a => `length: ${a.length}`
-    expect(lengther('a string')).toBe('length: 8')
-    expect(lengther(['a', 'string'])).toBe('length: 2')
+    const lengther:f<string[] | string, number> = a => a.length
+    expect(lengther('a string')).toBe(8)
+    expect(lengther(['a', 'string'])).toBe(2)
   })
 
   it('filters and returns an array', () => {
     // we can simply re-use our factor
-    const arrayFactor:UFilter<number[]> = ary => ary.map(factor)
+    const arrayFactor:f<number[], number[]> = ary => ary.map(n => factor(n))
     expect(arrayFactor([1, 2, 3, 5])).toEqual([1, 4, 9, 25])
 
     // or our upCaser...
@@ -35,20 +37,22 @@ describe('Unary filter, Typed Variatic Filter', () => {
   })
 
   it('operates on an object', () => {
-    const propifier:UFilter<{ [key: string]: string }> = o =>
+    // assure the value has first letter capitalized
+    const propifier:f<dict, dict> = o =>
       Object.entries(o)
-        .map(upCaser)
+        .map(ary => upCaser(ary))
         .reduce((obj, ary) => { // see Binary Filter...
           obj[ary[0]] = ary[1]
           return obj
-        }, {} as { [key: string]: string })
+        }, {} as dict)
 
     expect(propifier({ firstName: 'rob', lastName: 'robbins' })).toEqual({ firstName: 'Rob', lastName: 'Robbins' })
   })
 
   it('takes an undertermined number of args, but of the same type', () => {
-    const merge:TVFilter<string[]> = (a1, a2) => [...a1, ...a2]
-    expect(merge(['fee', 'fi'], ['fo', 'fum'])).toEqual(['fee', 'fi', 'fo', 'fum'])
+    // input and output types do not need to match
+    const merge:f<string[], string> = (a1, a2) => [...a1, ...a2].join(' ')
+    expect(merge(['fee', 'fi'], ['fo', 'fum'])).toEqual('fee fi fo fum')
 
     // ts should throw
     // merge('this', ['is', 'wrong'])

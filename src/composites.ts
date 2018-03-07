@@ -1,17 +1,17 @@
 import * as f from './functions'
 
-export interface UConsumer<T> {
-  in: f.UConsumer<T>;
+export interface Consumer<T> {
+  in: f.Consumer<T>;
   [propName: string]: any;
 }
 
-export interface UProducer<T> {
-  out: f.UProducer<T>;
+export interface Producer<T> {
+  out: f.Producer<T>;
   [propName: string]: any;
 }
 
-export interface UActor<T> {
-  in: f.UConsumer<T>;
-  out: f.UProducer<T>;
+export interface Actor<T, U> {
+  in: f.Consumer<T>;
+  out: f.Producer<U>;
   [propName: string]: any;
 }

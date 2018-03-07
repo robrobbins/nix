@@ -1,4 +1,4 @@
-import { UConsumer, BConsumer, TConsumer, TVConsumer } from '../src/functions'
+import { Consumer } from '../src/functions'
 
 describe('Unary and Typed Variadic Consumers', () => {
   // some external factoid that's available to the consumer
@@ -14,7 +14,7 @@ describe('Unary and Typed Variadic Consumers', () => {
   }
 
   it('consumes 1, interacts with thingie', () => {
-    const addSecret:UConsumer<Payload> = data => {
+    const addSecret:Consumer<Payload> = data => {
       externalApi.callMe({ ...data, secretKey: secret })
     }
 

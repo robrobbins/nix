@@ -1,4 +1,4 @@
-import { UConsumer } from '../src/composites'
+import { Consumer } from '../src/composites'
 
 describe('Consumer objects', () => {
   // some sort of defined payload for the external
@@ -13,7 +13,7 @@ describe('Consumer objects', () => {
   }
 
   it('can be an object literal', () => {
-    const chopper:UConsumer<string> = {
+    const chopper:Consumer<string> = {
       timesCalled: 0,
       in: function(str) {
         external.foo({
