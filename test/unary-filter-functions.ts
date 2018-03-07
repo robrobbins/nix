@@ -1,4 +1,4 @@
-import { UFilter, TVFilter } from '../src/interfaces/functions'
+import { UFilter, TVFilter } from '../src/functions'
 
 describe('Unary filter, Typed Variatic Filter', () => {
   const factor:UFilter<number> = n => n * n

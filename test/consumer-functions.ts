@@ -1,4 +1,4 @@
-import { UConsumer, BConsumer, TConsumer, TVConsumer } from '../src/interfaces/functions'
+import { UConsumer, BConsumer, TConsumer, TVConsumer } from '../src/functions'
 
 describe('Unary and Typed Variadic Consumers', () => {
   // some external factoid that's available to the consumer

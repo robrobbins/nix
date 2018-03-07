@@ -1,4 +1,4 @@
-import { UConsumer } from '../src/interfaces/composites'
+import { UConsumer } from '../src/composites'
 
 describe('Consumer objects', () => {
   // some sort of defined payload for the external
@@ -34,6 +34,10 @@ describe('Consumer objects', () => {
     chopper.in('aoeu htn s')
     expect(chopper.timesCalled).toBe(2)
     expect(spy.calls.mostRecent().args[0]).toEqual({ count: 2, words: ['aoeu', 'htn', 's'] })
+
+    // TS should throw
+    // chopper.in(5)
+    // chopper.in('foo', 'bar')
   })
 
 })

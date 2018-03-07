@@ -1,4 +1,4 @@
-import * as f from '../interfaces/functions'
+import * as f from './functions'
 
 export abstract class UConsumer<T> {
   abstract in: f.UConsumer<T>;

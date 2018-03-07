@@ -1,4 +1,4 @@
-import { BFilter, VFilter } from '../src/interfaces/functions'
+import { BFilter, VFilter } from '../src/functions'
 
 describe('Binary Filters', () => {
   // Note we default-val the 2nd arg here so that we don't have too in the body
