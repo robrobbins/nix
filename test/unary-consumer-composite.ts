@@ -39,5 +39,4 @@ describe('Consumer objects', () => {
     // chopper.in(5)
     // chopper.in('foo', 'bar')
   })
-
 })

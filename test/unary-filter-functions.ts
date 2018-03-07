@@ -1,6 +1,6 @@
 import { Filter as f} from '../src/functions'
 
-describe('Unary filter, Typed Variatic Filter', () => {
+describe('Unary filters', () => {
   const factor:f<number, number> = n => n * n
   const upCase:f<string, string> = s => s[0].toUpperCase() + s.substring(1)
   const upCaser:f<string[], string[]> = pair => [pair[0], upCase(pair[1])]
@@ -13,7 +13,7 @@ describe('Unary filter, Typed Variatic Filter', () => {
 
     // ts should throw
     // factor('3')
-    // factor(2, 3)
+    // factor(2, '3')
     // upCase(3)
   })
 

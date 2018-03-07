@@ -1,6 +1,6 @@
 import { Consumer } from '../src/functions'
 
-describe('Unary and Typed Variadic Consumers', () => {
+describe('Unary Consumer', () => {
   // some external factoid that's available to the consumer
   const secret = 'this-is-some-secret-stuff'
   // maybe you defined a payload of some sort
