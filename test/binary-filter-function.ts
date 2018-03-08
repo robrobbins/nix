@@ -1,8 +1,10 @@
 import { Filter } from '../src/functions'
 
 describe('Binary Filters', () => {
-  // Note we default-val the 2nd arg here so that we don't have too in the body
-  const product:Filter<number, number> = (n1, n2) => n1 * n2
+  // Note that if the input and return types are the same, you can omit the 2nd
+  const product:Filter<number> = (n1, n2) => n1 * n2
+  // In some cases, you may use a union as one of the types. We default the 2nd arg here
+  // showing this binary filter being called as if it were unary is an option too...
   const lengther:Filter<string | string[], number> = (a, b='') => a.length + b.length
 
   it('can be a 2-input binary filter of the same type', () => {
@@ -11,7 +13,7 @@ describe('Binary Filters', () => {
 
   it('provides the ability for a binary filter to have different input/output types', () => {
     expect(lengther('two', 'strings')).toBe(10)
-    // technically, this one is unary
+    // looks unary, but has defaulted 2nd arg...
     expect(lengther(['two', 'strings'])).toBe(2)
     expect(lengther('more than', ['two', 'strings'])).toBe(11)
 

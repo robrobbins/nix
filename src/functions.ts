@@ -19,10 +19,14 @@ export interface Consumer<T> {
  *
  *   Foo:Actor<input, output>...
  *
- * See specs for examples.
+ * You can, however, omit the 2nd arg and the return type will be assumed to be the same as the first:
+ *
+ *   Foo:Actor<input>
+ *
+ * See tests for examples.
  *
  */
-export interface Actor<T, U> {
+export interface Actor<T, U = T> {
   (...args: T[]): U;
 }
 
@@ -39,10 +43,13 @@ export interface Producer<T> {
 /*
  * Filter:
  *
- * A pure function taking the specified type(s) as args and returning a specified type.
+ * A pure function taking the specified type(s) as args and returning a specified type. As with the Actor,
+ * you may omit the 2nd type arg if it is the same as the first.
+ *
+ * See tests for more.
  *
  */
-export interface Filter<T, U> {
+export interface Filter<T, U = T> {
   (...args: T[]): U;
 }
 

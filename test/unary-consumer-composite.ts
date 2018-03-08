@@ -37,6 +37,6 @@ describe('Consumer objects', () => {
 
     // TS should throw
     // chopper.in(5)
-    // chopper.in('foo', 'bar')
+    // chopper.in('foo', 5)
   })
 })

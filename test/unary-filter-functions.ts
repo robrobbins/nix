@@ -1,9 +1,10 @@
 import { Filter as f} from '../src/functions'
 
 describe('Unary filters', () => {
-  const factor:f<number, number> = n => n * n
-  const upCase:f<string, string> = s => s[0].toUpperCase() + s.substring(1)
-  const upCaser:f<string[], string[]> = pair => [pair[0], upCase(pair[1])]
+  const factor:f<number> = n => n * n
+  const upCase:f<string> = s => s[0].toUpperCase() + s.substring(1)
+  const upCaser:f<string[]> = pair => [pair[0], upCase(pair[1])]
+
   // simple dictionary type
   type dict = { [key: string]: string } 
 
@@ -25,7 +26,7 @@ describe('Unary filters', () => {
 
   it('filters and returns an array', () => {
     // we can simply re-use our factor
-    const arrayFactor:f<number[], number[]> = ary => ary.map(n => factor(n))
+    const arrayFactor:f<number[]> = ary => ary.map(n => factor(n))
     expect(arrayFactor([1, 2, 3, 5])).toEqual([1, 4, 9, 25])
 
     // or our upCaser...
@@ -38,7 +39,7 @@ describe('Unary filters', () => {
 
   it('operates on an object', () => {
     // assure the value has first letter capitalized
-    const propifier:f<dict, dict> = o =>
+    const propifier:f<dict> = o =>
       Object.entries(o)
         .map(ary => upCaser(ary))
         .reduce((obj, ary) => { // see Binary Filter...
