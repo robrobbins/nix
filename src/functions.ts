@@ -5,8 +5,8 @@
  * Cosumers are assumed to have side effects.
  *
  */
-export interface Consumer<T> {
-  (...args: T[]): void;
+export interface Consumer<T, U = T, V = U> {
+  (t: T, u?: U, v?: V): void;
 }
 
 /*
@@ -15,19 +15,21 @@ export interface Consumer<T> {
  * An Actor is a Consumer that returns a value(s). Unlike Filters, Actors are impure functions.
  * It is a safe assumption that an Actor has side effects.
  *
- * Note that an Actor (and later, a Filter) defines its return type via a 2nd arg:
+ * Note that an Actor (and later, a Filter) defines its return type via its accepted types,
+ * specifically, the last type accepted:
  *
- *   Foo:Actor<input, output>...
- *
- * You can, however, omit the 2nd arg and the return type will be assumed to be the same as the first:
- *
- *   Foo:Actor<input>
+ *   Actor<foo> Unary type. Unarry function arity. Both input and output of <foo>:
+ *     `a => a`
+ *   Actor<foo, bar> Binary type. Fuction may be unary or binary in arity, output of <bar>:
+ *     `(a, b?) => b`
+ *   Actor<foo, bar, baz> Ternary type. Function may be binary ar ternary in arity, output of <baz>:
+ *     `(a, b, c?) => c`
  *
  * See tests for examples.
  *
  */
-export interface Actor<T, U = T> {
-  (...args: T[]): U;
+export interface Actor<T, U = T, V = U> {
+  (t: T, u?: U, v?: V): V;
 }
 
 /*
@@ -43,13 +45,14 @@ export interface Producer<T> {
 /*
  * Filter:
  *
- * A pure function taking the specified type(s) as args and returning a specified type. As with the Actor,
- * you may omit the 2nd type arg if it is the same as the first.
+ * A pure function taking the specified type(s) as args and returning a specified type.
  *
- * See tests for more.
+ * The behavior of the provided types in regard to input and output is the same as Actor.
+ *
+ * See Actor above
+ * See tests for examples
  *
  */
-export interface Filter<T, U = T> {
-  (...args: T[]): U;
+export interface Filter<T, U = T, V = U> {
+  (t: T, u?: U, v?: V): V;
 }
-

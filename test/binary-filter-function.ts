@@ -1,14 +1,17 @@
 import { Filter } from '../src/functions'
 
 describe('Binary Filters', () => {
-  // Note that if the input and return types are the same, you can omit the 2nd
-  const product:Filter<number> = (n1, n2) => n1 * n2
+  // unary type, unary or binary function sig (as 2nd arg is defaulted)
+  const product:Filter<number> = (n1, n2=1) => n1 * n2
   // In some cases, you may use a union as one of the types. We default the 2nd arg here
-  // showing this binary filter being called as if it were unary is an option too...
-  const lengther:Filter<string | string[], number> = (a, b='') => a.length + b.length
+  // ternary type def, binary function arity (can be called as unary too as 2nd arg is defaulted)
+  type lengthed = string | string[]
+  const lengther:Filter<lengthed, lengthed, number> = (a, b='') => a.length + b.length
 
   it('can be a 2-input binary filter of the same type', () => {
     expect(product(10, 4)).toBe(40)
+    // default arg lets you use it as unary
+    expect(product(11)).toBe(11)
   })
 
   it('provides the ability for a binary filter to have different input/output types', () => {

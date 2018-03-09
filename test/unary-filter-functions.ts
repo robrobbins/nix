@@ -50,9 +50,9 @@ describe('Unary filters', () => {
     expect(propifier({ firstName: 'rob', lastName: 'robbins' })).toEqual({ firstName: 'Rob', lastName: 'Robbins' })
   })
 
-  it('takes an undertermined number of args, but of the same type', () => {
+  it('uses the 3rd type as output when binary function arity', () => {
     // input and output types do not need to match
-    const merge:f<string[], string> = (a1, a2) => [...a1, ...a2].join(' ')
+    const merge:f<string[], string[], string> = (a1, a2=[]) => [...a1, ...a2].join(' ')
     expect(merge(['fee', 'fi'], ['fo', 'fum'])).toEqual('fee fi fo fum')
 
     // ts should throw
