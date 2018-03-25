@@ -3,7 +3,7 @@ Fast relief from framework fatigue...
 
 *Nix*. As in:
 
-* U*nix*: As in, [the Unix philosophy](https://en.wikipedia.org/wiki/Unix_philosophy)
+* U*nix*: [the Unix philosophy](https://en.wikipedia.org/wiki/Unix_philosophy)
 * *nix*: Veto, Reject. This according to [Merriam-Webster](https://www.merriam-webster.com/dictionary/nix)
 
 We are rejecting walled-gardens in favor of smaller, more composeable pieces. For specialized
