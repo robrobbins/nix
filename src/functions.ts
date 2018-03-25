@@ -56,3 +56,12 @@ export interface Producer<T> {
 export interface Filter<T, U = T, V = U> {
   (t: T, u?: U, v?: V): V;
 }
+
+/*
+ * Void:
+ *
+ * A simple interface representing a function that takes no arguments and returns no value
+ */
+export interface Void {
+  (): void;
+}
